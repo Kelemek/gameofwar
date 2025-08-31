@@ -16,6 +16,11 @@ function handleClick() {
             remainingText.textContent = `Remaining cards: ${data.remaining}`
             deckId = data.deck_id
             console.log(deckId)
+            computerScore = 0
+            myScore = 0
+            myScoreEl.textContent = `My score: 0`
+            computerScoreEl.textContent = `Computer score: 0`
+            drawCardBtn.disabled = false
         })
 }
 
