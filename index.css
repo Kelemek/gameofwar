@@ -3,7 +3,7 @@ html, body {
     padding: 0;
     background-image: url("img/table.png");
     font-family: "Exo 2", sans-serif;
-    height: 100vh;
+    height: 100svh;
 }
 
 body {
@@ -22,18 +22,18 @@ button {
 
 button#new-deck {
     align-self: flex-start;
-    padding: 5px;
+    padding: 1em;
 }
 
 button.draw {
     font-size: 1.2em;
-    padding: 5px;
+    padding: 1em;
     align-self: stretch;
 }
 
 div.card-slot {
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     height: 120px;
     width: calc(120px * 5 / 7);
 }
@@ -64,4 +64,8 @@ button:disabled {
 
 h2 {
     margin: 10px;
+}
+
+#header{
+    font-size: 2rem;
 }
