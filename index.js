@@ -71,7 +71,7 @@ function determineCardWinner(card1, card2) {
         myScoreEl.textContent = `My score: ${myScore}`
         return "You win!"
     } else {
-        return "War!"
+        return "Tie!"
     }
 }
 
