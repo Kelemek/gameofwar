@@ -1,0 +1,39 @@
+# Node
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Angular / build
+/dist/
+/build/
+/out-tsc/
+/.angular/
+/.angular/cache/
+coverage/
+/.sass-cache/
+
+# Angular app (nested)
+/angular-app/
+/angular-app/dist/
+/angular-app/node_modules/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+
+# Environment
+.env
+
+# Misc
+*.tgz
+src/**/*.tsbuildinfo
