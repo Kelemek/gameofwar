@@ -1,0 +1,16 @@
+<div class="top">
+  <button (click)="newGame()">New Game</button>
+  <p>{{ remaining }}</p>
+</div>
+<h2>{{ header }}</h2>
+<h3>Computer score: {{ computerScore }}</h3>
+<div id="cards">
+  <div class="card-slot">
+    <img [src]="images[0]" class="card" *ngIf="images[0]" />
+  </div>
+  <div class="card-slot">
+    <img [src]="images[1]" class="card" *ngIf="images[1]" />
+  </div>
+</div>
+<h3>My score: {{ myScore }}</h3>
+<button class="draw" (click)="drawCards()" [disabled]="drawDisabled">Draw</button>

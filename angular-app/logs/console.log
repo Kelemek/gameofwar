@@ -1,0 +1,56 @@
+[2025-12-11T02:13:37.874Z] info: [webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled.
+[2025-12-11T02:13:37.968Z] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+[2025-12-11T02:13:38.784Z] STEP 0: counts={"player":0,"computer":0}
+[2025-12-11T02:13:38.784Z] STOP: deck depleted player=0 computer=0
+[2025-12-11T02:14:17.652Z] info: [webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled.
+[2025-12-11T02:14:17.697Z] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+[2025-12-11T02:14:23.858Z] STEP 0: counts={"player":26,"computer":26}
+[2025-12-11T02:14:26.662Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:14:46.462Z] info: [webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled.
+[2025-12-11T02:14:46.530Z] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+[2025-12-11T02:14:54.686Z] STEP 0: counts={"player":26,"computer":26}
+[2025-12-11T02:14:57.499Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:14:58.562Z] STEP 1: counts={"player":27,"computer":25}
+[2025-12-11T02:15:01.333Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:02.390Z] STEP 2: counts={"player":26,"computer":26}
+[2025-12-11T02:15:05.170Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:06.227Z] STEP 3: counts={"player":27,"computer":25}
+[2025-12-11T02:15:09.003Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:10.060Z] STEP 4: counts={"player":26,"computer":26}
+[2025-12-11T02:15:12.835Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:13.891Z] STEP 5: counts={"player":27,"computer":25}
+[2025-12-11T02:15:16.647Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:17.702Z] STEP 6: counts={"player":28,"computer":24}
+[2025-12-11T02:15:20.467Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:21.522Z] STEP 7: counts={"player":27,"computer":25}
+[2025-12-11T02:15:24.284Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:25.338Z] STEP 8: counts={"player":28,"computer":24}
+[2025-12-11T02:15:28.101Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:29.156Z] STEP 9: counts={"player":27,"computer":25}
+[2025-12-11T02:15:31.920Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:32.975Z] STEP 10: counts={"player":26,"computer":26}
+[2025-12-11T02:15:35.751Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:36.807Z] STEP 11: counts={"player":27,"computer":25}
+[2025-12-11T02:15:39.586Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:40.639Z] STEP 12: counts={"player":28,"computer":24}
+[2025-12-11T02:15:43.397Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:44.451Z] STEP 13: counts={"player":27,"computer":25}
+[2025-12-11T02:15:47.217Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:48.275Z] STEP 14: counts={"player":28,"computer":24}
+[2025-12-11T02:15:51.034Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:52.088Z] STEP 15: counts={"player":29,"computer":23}
+[2025-12-11T02:15:54.853Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:55.910Z] STEP 16: counts={"player":30,"computer":22}
+[2025-12-11T02:15:58.685Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:15:59.738Z] STEP 17: counts={"player":29,"computer":23}
+[2025-12-11T02:16:02.503Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:16:03.558Z] STEP 18: counts={"player":30,"computer":22}
+[2025-12-11T02:16:06.316Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:16:07.371Z] STEP 19: counts={"player":31,"computer":21}
+[2025-12-11T02:16:10.136Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:16:11.193Z] STEP 20: counts={"player":30,"computer":22}
+[2025-12-11T02:16:13.968Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:16:15.023Z] STEP 21: counts={"player":29,"computer":23}
+[2025-12-11T02:16:17.801Z] debug: Battle draw: JSHandle@object
+[2025-12-11T02:16:18.855Z] STEP 22: counts={"player":28,"computer":24}
+[2025-12-11T02:16:21.600Z] debug: Battle draw: JSHandle@object

@@ -1,0 +1,58 @@
+.top { display:flex; gap:12px; align-items:center; }
+.card { width:140px; border-radius:6px; box-shadow:0 6px 12px rgba(0,0,0,0.25); }
+.card-slot { display:inline-block; margin:8px; width:150px; height:200px; display:flex; align-items:center; justify-content:center; }
+
+#game-area { display:flex; align-items:flex-end; gap:24px; justify-content:center; margin:12px 0 20px; }
+.captured { width:120px; text-align:center; font-size:14px; color:#222; display:flex; flex-direction:column; align-items:center; gap:6px; }
+.captured .count { margin-top:0; font-weight:800; font-size:18px; padding-top:8px; }
+.stack { position:relative; width:80px; height:55px; margin:6px 0 12px; }
+.stack-card { position:absolute; left:50%; top:50%; width:70px; height:96px; border-radius:6px; background:linear-gradient(135deg,#efefef 0%, #e0e0e0 100%); box-shadow:0 4px 8px rgba(0,0,0,0.15); transition:transform 260ms ease, opacity 260ms ease; }
+.stack-card:nth-child(odd){ background:linear-gradient(135deg,#f7f7f7,#eaeaea); }
+
+/* Give the top card in the captured stacks the card-back pattern */
+.stack-card:last-child {
+	background: repeating-linear-gradient(45deg,#3a6ea5 0 4px,#2d5a86 4px 8px);
+	box-shadow:0 6px 12px rgba(0,0,0,0.35);
+}
+
+.war-visual { display:flex; gap:6px; justify-content:center; margin-top:8px; }
+.card-back { width:100px; height:140px; border-radius:6px; background:repeating-linear-gradient(45deg,#3a6ea5 0 4px,#2d5a86 4px 8px); box-shadow:0 6px 12px rgba(0,0,0,0.35); }
+.card-back.small { width:36px; height:50px; box-shadow:0 3px 6px rgba(0,0,0,0.25); }
+
+#cards { display:flex; gap:16px; align-items:center; }
+
+/* flip card */
+.flip-card { width:140px; height:196px; perspective: 1000px; display:flex; align-items:center; justify-content:center; }
+.flip-inner { position:relative; width:100%; height:100%; transform-style: preserve-3d; transition: transform 480ms cubic-bezier(.2,.8,.2,1); }
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back { position:absolute; width:100%; height:100%; backface-visibility: hidden; border-radius:6px; }
+.flip-front { background-size:cover; background-position:center; box-shadow:0 6px 12px rgba(0,0,0,0.28); transform: rotateY(180deg); }
+.flip-back { background:repeating-linear-gradient(45deg,#3a6ea5 0 4px,#2d5a86 4px 8px); box-shadow:0 6px 12px rgba(0,0,0,0.35); }
+
+.war-center { display:flex; align-items:center; gap:10px; padding:6px 8px; }
+.war-center .vs { font-weight:800; color:#c33; margin:0 6px; letter-spacing:1px; }
+.reveal-label { font-weight:900; color:#c33; font-size:18px; padding:6px 12px; background:rgba(255,230,230,0.9); border-radius:6px; box-shadow:0 6px 12px rgba(0,0,0,0.12); }
+.reveal-label { animation: pulse 800ms ease-in-out 1; }
+@keyframes pulse { 0% { transform:scale(0.9); opacity:0.6 } 40% { transform:scale(1.03); opacity:1 } 100% { transform:scale(1); opacity:1 } }
+
+.controls { text-align:center; margin-top:8px; }
+.draw { padding:8px 16px; border-radius:6px; background:#2b7cff; color:white; border:none; box-shadow:0 4px 8px rgba(43,124,255,0.25); cursor:pointer; }
+.draw[disabled] { opacity:0.5; cursor:not-allowed; box-shadow:none; }
+
+/* simple entry animation */
+
+/* animation layer for flying cards */
+.anim-layer { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1200; }
+.anim-card { position:fixed; width:70px; height:96px; border-radius:6px; background-size:cover; background-position:center; transform-origin:center; transition:transform 600ms cubic-bezier(.2,.8,.2,1), opacity 300ms linear; box-shadow:0 8px 18px rgba(0,0,0,0.35); }
+
+/* confetti overlay */
+.confetti-overlay { position:fixed; inset:0; pointer-events:none; z-index:2000; overflow:hidden; }
+.confetti-piece { position:absolute; top:-10%; width:10px; height:18px; opacity:0.95; transform:rotate(10deg); animation: fall 4s linear forwards; }
+.confetti-piece:nth-child(odd) { border-radius:2px; }
+@keyframes fall {
+	0% { transform: translateY(-10vh) rotate(0deg); opacity:1 }
+	100% { transform: translateY(110vh) rotate(600deg); opacity:0.85 }
+}
+
+/* Center pile visuals (the large face-down piles near the center) */
+/* center-pile removed — large center piles are no longer used */

@@ -1,23 +1,31 @@
-<html>
+<html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="index.css">
     </head>
-    <body>
-        <div class="top">
-            <button id="new-deck">New Game</button>
-            <p id="remaining"></p>
+    <body ng-app="gameOfWarApp">
+        <div class="top" ng-controller="GameController as vm">
+            <button ng-click="vm.newGame()">New Game</button>
+            <p>{{vm.remaining}}</p>
         </div>
-        <h2 id="header">Game of War</h2>
-        <h3 id="computer-score">Computer score: 0</h3>
+        <h2>{{vm.header}}</h2>
+        <h3>Computer score: {{vm.computerScore}}</h3>
         <div id="cards">
-            <div class="card-slot"></div>
-            <div class="card-slot"></div>
+            <div class="card-slot">
+                <img ng-src="{{vm.images[0]}}" class="card" ng-if="vm.images[0]" />
+            </div>
+            <div class="card-slot">
+                <img ng-src="{{vm.images[1]}}" class="card" ng-if="vm.images[1]" />
+            </div>
         </div>
-        <h3 id="my-score">My score: 0</h3>
-        <button id="draw-cards" class="draw">Draw</button>
-        <script src="index.js"></script>
+        <h3>My score: {{vm.myScore}}</h3>
+        <button class="draw" ng-click="vm.drawCards()" ng-disabled="vm.drawDisabled">Draw</button>
+
+        <!-- AngularJS and app scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+        <script src="app/app.module.js"></script>
+        <script src="app/controllers/game.controller.js"></script>
     </body>
 </html>

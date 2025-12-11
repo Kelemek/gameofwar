@@ -1,0 +1,34 @@
+****************************************************************************************
+This is a simple server for use in testing or debugging Angular applications locally.
+It hasn't been reviewed for security issues.
+
+DON'T USE IT FOR PRODUCTION!
+****************************************************************************************
+One or more browsers which are configured in the project's Browserslist configuration will be ignored as ES5 output is not supported by the Angular CLI.
+Ignored browsers: kaios 2.5, op_mini all
+- Generating browser application bundles (phase: setup)...
+    TypeScript compiler options "target" and "useDefineForClassFields" are set to "ES2022" and "false" respectively by the Angular CLI. To control ECMA version and features use the Browerslist configuration. For more information, see https://angular.io/guide/build#configuring-browser-compatibility
+    NOTE: You can set the "target" to "ES2022" in the project's tsconfig to remove this warning.
+✔ Browser application bundle generation complete.
+
+Initial Chunk Files   | Names         |  Raw Size | Estimated Transfer Size
+main.js               | main          | 226.51 kB |                64.69 kB
+polyfills.js          | polyfills     | 104.43 kB |                31.76 kB
+styles.css, styles.js | styles        |  71.46 kB |                21.60 kB
+runtime.js            | runtime       |   1.23 kB |               666 bytes
+
+| Initial Total | 403.63 kB |               118.70 kB
+
+Build at: 2025-12-11T02:13:24.607Z - Hash: 186affa03467350e - Time: 882ms
+
+** Angular Live Development Server is listening on 127.0.0.1:63899, open your browser on http://127.0.0.1:63899/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+4 unchanged chunks
+
+Build at: 2025-12-11T02:13:24.911Z - Hash: 186affa03467350e - Time: 264ms
+
+✔ Compiled successfully.

@@ -10,13 +10,13 @@ yarn.lock
 /dist/
 /build/
 /out-tsc/
-/.angular/
-/.angular/cache/
+*/.angular/
+*/.angular/cache/
 coverage/
 /.sass-cache/
 
 # Angular app (nested)
-/angular-app/
+
 /angular-app/dist/
 /angular-app/node_modules/
 

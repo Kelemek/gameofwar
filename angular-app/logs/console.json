@@ -1,0 +1,16 @@
+[
+  {
+    "type": "info",
+    "text": "[webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled.",
+    "args": [
+      "[webpack-dev-server] Server started: Hot Module Replacement disabled, Live Reloading enabled, Progress disabled, Overlay enabled."
+    ],
+    "time": "2025-12-11T02:13:37.874Z"
+  },
+  {
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "args": [],
+    "time": "2025-12-11T02:13:37.968Z"
+  }
+]
