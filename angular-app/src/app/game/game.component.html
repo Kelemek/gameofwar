@@ -1,23 +1,25 @@
 <div class="top">
   <button (click)="newGame()">New Game</button>
+  <h2>{{ header }}</h2>
   <p>{{ remaining }}</p>
 </div>
-<h2>{{ header }}</h2>
 
 <div id="game-area">
   <div class="captured computer">
     <h4>Computer</h4>
-    <div class="stack" aria-hidden="true">
-       <div class="stack-card" *ngFor="let _ of computerCapturedStack; let i = index"
-         [style.transform]="'translate(-50%,-50%) translateY(-' + (i * 1.5) + 'px)'"
-         [style.zIndex]="i"></div>
+    <div class="deck-row">
+      <div class="stack" aria-hidden="true">
+         <div class="stack-card" *ngFor="let _ of computerCapturedStack; let i = index"
+           [style.transform]="'translate(-50%,-50%) translateY(-' + (i * 1.5) + 'px)'"
+           [style.zIndex]="i"></div>
+      </div>
+      <div class="count">{{ computerDeck.length }}</div>
     </div>
     <div class="war-visual-slot">
       <div class="war-visual" *ngIf="lastBattleWasWar && warPlaced">
         <div class="card-back small" *ngFor="let n of [1,2,3]"></div>
       </div>
     </div>
-    <div class="count">{{ computerDeck.length }}</div>
   </div>
 
     <div id="cards">
@@ -88,17 +90,19 @@
 
   <div class="captured player">
     <h4>You</h4>
-    <div class="stack" aria-hidden="true">
-       <div class="stack-card" *ngFor="let _ of playerCapturedStack; let i = index"
-         [style.transform]="'translate(-50%,-50%) translateY(-' + (i * 1.5) + 'px)'"
-         [style.zIndex]="i"></div>
+    <div class="deck-row">
+      <div class="count">{{ playerDeck.length }}</div>
+      <div class="stack" aria-hidden="true">
+         <div class="stack-card" *ngFor="let _ of playerCapturedStack; let i = index"
+           [style.transform]="'translate(-50%,-50%) translateY(-' + (i * 1.5) + 'px)'"
+           [style.zIndex]="i"></div>
+      </div>
     </div>
     <div class="war-visual-slot">
       <div class="war-visual" *ngIf="lastBattleWasWar && warPlaced">
         <div class="card-back small" *ngFor="let n of [1,2,3]"></div>
       </div>
     </div>
-    <div class="count">{{ playerDeck.length }}</div>
   </div>
 </div>
 
@@ -108,7 +112,7 @@
   <label style="margin-left:8px">Speed:</label>
   <input type="range" min="2" max="400" step="1" [(ngModel)]="autoStepDelayMs" />
   <span>{{autoStepDelayMs}}ms</span>
-  <label style="margin-left:12px"><input type="checkbox" [(ngModel)]="fastSim" [disabled]="autoPlayRunning"> Fast Sim</label>
+  <label class="toggle-label"><input type="checkbox" [(ngModel)]="fastSim" [disabled]="autoPlayRunning"><span class="toggle-slider"></span> Fast Sim</label>
 </div>
 
 <div class="anim-layer" *ngIf="animatingCards.length">

@@ -5,8 +5,11 @@ html, body {
   background-image: url("/assets/table.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   font-family: "Exo 2", sans-serif;
   height: 100svh;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -15,6 +18,8 @@ body {
   align-items: center;
   justify-content: space-between;
   color: white;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  box-sizing: border-box;
 }
 
 button {
@@ -34,10 +39,7 @@ button.draw {
   align-self: stretch;
 }
 
-div.card-slot {
-  height: 120px;
-  width: calc(120px * 5 / 7);
-}
+/* Card slot dimensions are handled by game component for responsive scaling */
 
 div.card-slot:nth-of-type(1) {
   margin-bottom: 10px;
@@ -67,6 +69,6 @@ h2 {
   margin: 10px;
 }
 
-#header{
+#header {
   font-size: 2rem;
 }
