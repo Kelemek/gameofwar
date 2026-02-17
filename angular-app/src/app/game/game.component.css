@@ -1,6 +1,10 @@
 /* Responsive scaling variables */
 :host {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
   --card-width: 140px;
   --card-height: 196px;
   --card-slot-w: 150px;
@@ -11,7 +15,7 @@
   --stack-h: 55px;
   --war-card-small-w: 36px;
   --war-card-small-h: 50px;
-  --game-gap: 24px;
+  --game-gap: 12px;
 }
 
 .top { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative; padding: 0 12px; box-sizing: border-box; white-space: nowrap; }
@@ -22,15 +26,15 @@
 .card { width: var(--card-width); border-radius:6px; box-shadow:0 6px 12px rgba(0,0,0,0.25); }
 .card-slot { display:inline-block; margin:8px; width: var(--card-slot-w); height: var(--card-slot-h); display:flex; align-items:center; justify-content:center; }
 
-#game-area { display: flex; align-items: flex-start; gap: var(--game-gap); justify-content: center; margin: 12px 0 20px; }
-.captured { width: 120px; text-align:center; font-size: 14px; color: #fff; display:flex; flex-direction:column; align-items:center; gap:6px; }
-.captured h4 { margin: 0 0 6px 0; }
-.deck-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 56px 0 6px 0; min-height: var(--stack-h); }
-/* Computer: [stack] [count] so count is between deck and center cards */
-.captured.computer .deck-row { flex-direction: row; }
-/* Player: [count] [stack] so count is between center cards and deck (same as left side) */
-.captured.player .deck-row { flex-direction: row; }
-.war-visual-slot { min-height: 58px; margin-top: 20px; display: flex; align-items: center; justify-content: center; }
+#game-area { display: flex; align-items: center; gap: var(--game-gap); justify-content: center; margin: 12px 0 20px; width: 100%; box-sizing: border-box; flex: 1; min-height: 0; }
+.captured { width: 120px; text-align:center; font-size: 14px; color: #fff; display:flex; flex-direction:column; align-items:center; gap:6px; position: relative; }
+.captured h4 { position: absolute; top: -56px; left: 50%; transform: translateX(-50%); margin: 0; width: 100%; text-align: center; box-sizing: border-box; z-index: 100; }
+.deck-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 88px 0 6px 0; min-height: var(--stack-h); }
+/* Computer: [stack] [count] – align right so deck is closer to center cards */
+.captured.computer .deck-row { flex-direction: row; justify-content: flex-end; }
+/* Player: [count] [stack] – align left so deck is closer to center cards */
+.captured.player .deck-row { flex-direction: row; justify-content: flex-start; }
+.war-visual-slot { min-height: 58px; margin-top: 40px; display: flex; align-items: center; justify-content: center; }
 .captured .count { margin: 0; font-weight: 800; font-size: 18px; padding: 0; }
 .stack { position: relative; width: var(--stack-w); height: var(--stack-h); margin: 0; flex-shrink: 0; }
 .stack-card { position:absolute; left:50%; top:50%; width: var(--stack-card-w); height: var(--stack-card-h); border-radius:6px; background:linear-gradient(135deg,#efefef 0%, #e0e0e0 100%); box-shadow:0 4px 8px rgba(0,0,0,0.15); transition:transform 260ms ease, opacity 260ms ease; }
@@ -66,7 +70,7 @@
 @keyframes reveal-pulse { 0% { transform:translate(-50%,-50%) scale(0.9); opacity:0.6 } 40% { transform:translate(-50%,-50%) scale(1.03); opacity:1 } 100% { transform:translate(-50%,-50%) scale(1); opacity:1 } }
 @keyframes pulse { 0% { transform:scale(0.9); opacity:0.6 } 40% { transform:scale(1.03); opacity:1 } 100% { transform:scale(1); opacity:1 } }
 
-.controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; text-align: center; }
+.controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; margin-bottom: 16px; padding-bottom: env(safe-area-inset-bottom); text-align: center; }
 .controls label { display: inline-flex; align-items: center; }
 .toggle-label { gap: 8px; cursor: pointer; user-select: none; }
 .toggle-label input { position: absolute; opacity: 0; width: 0; height: 0; }
@@ -99,7 +103,48 @@
 /* Center pile visuals (the large face-down piles near the center) */
 /* center-pile removed — large center piles are no longer used */
 
-/* Mobile landscape only: scale down to fit short viewport */
+/* Portrait / narrow: fit full width of screen (content will be small) */
+@media (max-width: 480px) {
+  :host {
+    --card-width: 56px;
+    --card-height: 78px;
+    --card-slot-w: 64px;
+    --card-slot-h: 88px;
+    --stack-card-w: 28px;
+    --stack-card-h: 38px;
+    --stack-w: 36px;
+    --stack-h: 26px;
+    --war-card-small-w: 16px;
+    --war-card-small-h: 22px;
+    --game-gap: 6px;
+  }
+  #game-area { margin: 8px 0 12px; gap: 6px; flex-wrap: nowrap; min-width: 0; }
+  .captured { width: 56px; min-width: 48px; font-size: 10px; flex-shrink: 0; }
+  .captured .count { font-size: 12px; }
+  .captured h4 { font-size: 0.75rem; top: -48px; }
+  #cards { min-width: 0; flex: 1 1 0; height: auto; min-height: 88px; max-width: 140px; }
+  .deck-row { margin: 48px 0 4px 0; }
+  .war-visual-slot { min-height: 36px; margin-top: 24px; }
+  .vs-overlay { font-size: 24px; }
+  .reveal-overlay { font-size: 20px; }
+  .top h2 { font-size: 0.95rem; }
+  .top { padding: 0 6px; }
+  .top button, .draw, .controls .auto { padding: 6px 10px; font-size: 0.8rem; }
+  .controls { gap: 6px; margin-top: 6px; margin-bottom: 12px; }
+  .controls label { font-size: 0.8rem; }
+}
+
+/* Landscape: use full width and height – spread decks, fill height, tighter spacing */
+@media (orientation: landscape) {
+  :host { min-width: 100%; }
+  #game-area { justify-content: space-between; align-items: center; padding: 0 12px; gap: 8px; margin: 4px 0 6px 0; }
+  .deck-row { margin: 28px 0 4px 0; }
+  .war-visual-slot { margin-top: 20px; min-height: 44px; }
+  .top { padding: 0 8px 2px 8px; }
+  .controls { margin-top: 4px; margin-bottom: 12px; padding: 2px 0 0 0; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+}
+
+/* Mobile landscape: scale down to fit short viewport but still use full width */
 @media (orientation: landscape) and (max-height: 520px) {
   :host {
     --card-width: 90px;
@@ -114,13 +159,40 @@
     --war-card-small-h: 34px;
     --game-gap: 10px;
   }
-  #game-area { margin: 6px 0 10px; }
+  #game-area { margin: 2px 0 4px 0; padding: 0 10px; gap: 6px; }
   .captured { width: 80px; font-size: 12px; }
   .captured .count { font-size: 14px; }
-  .captured h4 { font-size: 0.85rem; margin: 0 0 4px 0; }
+  .captured h4 { font-size: 0.85rem; top: -52px; }
+  .deck-row { margin: 24px 0 2px 0; }
+  .war-visual-slot { margin-top: 16px; min-height: 36px; }
   #cards { min-width: 220px; height: 140px; }
   .vs-overlay { font-size: 40px; }
   .reveal-overlay { font-size: 28px; }
-  .controls { margin-top: 4px; }
+  .controls { margin-top: 2px; margin-bottom: 10px; padding: 0; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .top { padding: 0 6px 0 6px; }
   .top button, .draw, .controls .auto { padding: 6px 12px; font-size: 0.9rem; }
+}
+
+/* Landscape with more width (e.g. 852px): slightly larger cards to fill space */
+@media (orientation: landscape) and (min-width: 700px) and (max-height: 520px) {
+  :host {
+    --card-width: 110px;
+    --card-height: 154px;
+    --card-slot-w: 118px;
+    --card-slot-h: 158px;
+    --stack-card-w: 52px;
+    --stack-card-h: 72px;
+    --stack-w: 60px;
+    --stack-h: 42px;
+    --war-card-small-w: 28px;
+    --war-card-small-h: 38px;
+    --game-gap: 10px;
+  }
+  .captured { width: 96px; font-size: 13px; }
+  .captured .count { font-size: 15px; }
+  .deck-row { margin: 26px 0 4px 0; }
+  .war-visual-slot { margin-top: 18px; min-height: 42px; }
+  #cards { min-width: 260px; height: 162px; }
+  .vs-overlay { font-size: 48px; }
+  .reveal-overlay { font-size: 32px; }
 }
