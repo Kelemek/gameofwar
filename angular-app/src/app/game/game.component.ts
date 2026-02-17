@@ -150,6 +150,11 @@ export class GameComponent {
       this.flipCards.left = false;
       this.flipCards.right = false;
       this.battleStage = 'animating';
+      // show message as cards animate to the deck
+      const numCards = this.currentStakes.length;
+      if (winner === 'player') this.header = `You win a battle (+${numCards} cards)`;
+      else this.header = `Computer wins a battle (+${numCards} cards)`;
+      this.cdr.detectChanges();
       // animate and award the current stakes
       await this.animateStakes(this.currentStakes, winner);
       if (winner === 'player') this.playerDeck.push(...this.currentStakes);
@@ -354,6 +359,10 @@ export class GameComponent {
     }
 
     const cleanStakes = stakes.filter(Boolean);
+    // show message as cards animate to the deck
+    if (winner === 'player') this.header = `You win a battle (+${cleanStakes.length} cards)`;
+    else if (winner === 'computer') this.header = `Computer wins a battle (+${cleanStakes.length} cards)`;
+    this.cdr.detectChanges();
     // animate stakes flying to winner stack before actually awarding (skip in fast sim)
     if (!skipAnimations) await this.animateStakes(cleanStakes, winner);
     // clear the war visual after animation
@@ -363,10 +372,8 @@ export class GameComponent {
 
     if (winner === 'player') {
       this.playerDeck.push(...cleanStakes);
-      this.header = `You win a battle (+${cleanStakes.length} cards)`;
     } else if (winner === 'computer') {
       this.computerDeck.push(...cleanStakes);
-      this.header = `Computer wins a battle (+${cleanStakes.length} cards)`;
     } else {
       if (this.playerDeck.length > this.computerDeck.length) this.playerDeck.push(...cleanStakes);
       else this.computerDeck.push(...cleanStakes);

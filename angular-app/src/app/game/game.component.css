@@ -29,6 +29,8 @@
 #game-area { display: flex; align-items: center; gap: var(--game-gap); justify-content: center; margin: 12px 0 20px; width: 100%; box-sizing: border-box; flex: 1; min-height: 0; }
 .captured { width: 120px; text-align:center; font-size: 14px; color: #fff; display:flex; flex-direction:column; align-items:center; gap:6px; position: relative; }
 .captured h4 { position: absolute; top: -56px; left: 50%; transform: translateX(-50%); margin: 0; width: 100%; text-align: center; box-sizing: border-box; z-index: 100; }
+.captured.computer h4 { left: 38%; }
+.captured.player h4 { left: 62%; }
 .deck-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 88px 0 6px 0; min-height: var(--stack-h); }
 /* Computer: [stack] [count] – align right so deck is closer to center cards */
 .captured.computer .deck-row { flex-direction: row; justify-content: flex-end; }
