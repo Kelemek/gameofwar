@@ -1,0 +1,7 @@
+{
+  "name": "gameofwar",
+  "private": true,
+  "scripts": {
+    "start": "cd angular-app && npm start"
+  }
+}

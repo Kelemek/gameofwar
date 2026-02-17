@@ -12,8 +12,10 @@
          [style.transform]="'translate(-50%,-50%) translateY(-' + (i * 1.5) + 'px)'"
          [style.zIndex]="i"></div>
     </div>
-    <div class="war-visual" *ngIf="lastBattleWasWar && warPlaced">
-      <div class="card-back small" *ngFor="let n of [1,2,3]"></div>
+    <div class="war-visual-slot">
+      <div class="war-visual" *ngIf="lastBattleWasWar && warPlaced">
+        <div class="card-back small" *ngFor="let n of [1,2,3]"></div>
+      </div>
     </div>
     <div class="count">{{ computerDeck.length }}</div>
   </div>
@@ -30,38 +32,44 @@
       </div>
       <div class="war-center" *ngIf="lastBattleWasWar" [style.visibility]="battleStage === 'animating' ? 'hidden' : 'visible'">
       <ng-container *ngIf="warPhase === 'facedown'">
-        <!-- show large face-up cards in the center so the tied cards are visible -->
-        <div class="flip-card" [class.flipped]="true">
-          <div class="flip-inner">
-            <div class="flip-front" *ngIf="images[0]" [style.backgroundImage]="'url(' + images[0] + ')'">
+        <div class="vs-overlay">WAR</div>
+        <div class="war-card-slot">
+          <div class="flip-card" [class.flipped]="true">
+            <div class="flip-inner">
+              <div class="flip-front" *ngIf="images[0]" [style.backgroundImage]="'url(' + images[0] + ')'">
+              </div>
+              <div class="flip-back"></div>
             </div>
-            <div class="flip-back"></div>
           </div>
         </div>
-        <div class="vs">WAR</div>
-        <div class="flip-card" [class.flipped]="true">
-          <div class="flip-inner">
-            <div class="flip-front" *ngIf="images[1]" [style.backgroundImage]="'url(' + images[1] + ')'">
+        <div class="war-card-slot">
+          <div class="flip-card" [class.flipped]="true">
+            <div class="flip-inner">
+              <div class="flip-front" *ngIf="images[1]" [style.backgroundImage]="'url(' + images[1] + ')'">
+              </div>
+              <div class="flip-back"></div>
             </div>
-            <div class="flip-back"></div>
           </div>
         </div>
       </ng-container>
       <ng-container *ngIf="warPhase === 'reveal'">
-        <!-- show the revealed deciding cards large in center as well -->
-        <div class="flip-card" [class.flipped]="true">
-          <div class="flip-inner">
-            <div class="flip-front" *ngIf="images[0]" [style.backgroundImage]="'url(' + images[0] + ')'">
+        <div class="reveal-overlay">REVEAL</div>
+        <div class="war-card-slot">
+          <div class="flip-card" [class.flipped]="true">
+            <div class="flip-inner">
+              <div class="flip-front" *ngIf="images[0]" [style.backgroundImage]="'url(' + images[0] + ')'">
+              </div>
+              <div class="flip-back"></div>
             </div>
-            <div class="flip-back"></div>
           </div>
         </div>
-        <div class="reveal-label">REVEAL</div>
-        <div class="flip-card" [class.flipped]="true">
-          <div class="flip-inner">
-            <div class="flip-front" *ngIf="images[1]" [style.backgroundImage]="'url(' + images[1] + ')'">
+        <div class="war-card-slot">
+          <div class="flip-card" [class.flipped]="true">
+            <div class="flip-inner">
+              <div class="flip-front" *ngIf="images[1]" [style.backgroundImage]="'url(' + images[1] + ')'">
+              </div>
+              <div class="flip-back"></div>
             </div>
-            <div class="flip-back"></div>
           </div>
         </div>
       </ng-container>
@@ -85,8 +93,10 @@
          [style.transform]="'translate(-50%,-50%) translateY(-' + (i * 1.5) + 'px)'"
          [style.zIndex]="i"></div>
     </div>
-    <div class="war-visual" *ngIf="lastBattleWasWar && warPlaced">
-      <div class="card-back small" *ngFor="let n of [1,2,3]"></div>
+    <div class="war-visual-slot">
+      <div class="war-visual" *ngIf="lastBattleWasWar && warPlaced">
+        <div class="card-back small" *ngFor="let n of [1,2,3]"></div>
+      </div>
     </div>
     <div class="count">{{ playerDeck.length }}</div>
   </div>
@@ -94,7 +104,7 @@
 
 <div class="controls">
   <button class="draw" (click)="nextStep()" [disabled]="drawDisabled || inBattle || autoPlay">{{ battleStage === 'idle' ? 'Draw' : 'Next' }}</button>
-  <button class="auto" (click)="toggleAutoPlay()">{{ autoPlay ? 'Stop' : 'Auto Play' }}</button>
+  <button class="auto" (click)="toggleAutoPlay()">{{ autoPlay ? 'Stop' : 'Auto' }}</button>
   <label style="margin-left:8px">Speed:</label>
   <input type="range" min="2" max="400" step="1" [(ngModel)]="autoStepDelayMs" />
   <span>{{autoStepDelayMs}}ms</span>

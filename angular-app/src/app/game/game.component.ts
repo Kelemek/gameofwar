@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-game',
+  standalone: false,
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
@@ -39,7 +40,7 @@ export class GameComponent {
   confettiArray: number[] = [];
   fastSim = false;
 
-  constructor(private gameService: GameService) {}
+  constructor(private gameService: GameService, private cdr: ChangeDetectorRef) {}
 
   newGame() {
     // stop any running autoplay when starting a new game
@@ -54,11 +55,12 @@ export class GameComponent {
       // split 26/26
       this.playerDeck = cards.filter((_: any, i: number) => i % 2 === 0).map((c: any) => ({...c}));
       this.computerDeck = cards.filter((_: any, i: number) => i % 2 === 1).map((c: any) => ({...c}));
-        this.playerCaptured = 0;
-        this.computerCaptured = 0;
-        this.images = [];
-        this.header = 'Game of War';
-        this.drawDisabled = false;
+      this.playerCaptured = 0;
+      this.computerCaptured = 0;
+      this.images = [];
+      this.header = 'Game of War';
+      this.drawDisabled = false;
+      this.cdr.detectChanges();
     });
   }
 
@@ -79,6 +81,7 @@ export class GameComponent {
       // Fast simulation: skip animations and run full battles quickly
       while (this.autoPlay && this.playerDeck.length > 0 && this.computerDeck.length > 0) {
         await this.playOneBattle(true);
+        this.cdr.detectChanges();
         // minimal pause so UI can breathe (very small)
         await this.sleep(Math.max(1, this.autoStepDelayMs));
       }
@@ -106,10 +109,13 @@ export class GameComponent {
     if (this.playerDeck.length === 0 || this.computerDeck.length === 0) {
       this.launchConfetti();
     }
+    this.cdr.detectChanges();
   }
 
   stopAutoPlay() {
     this.autoPlay = false;
+    this.drawDisabled = (this.playerDeck.length === 0 || this.computerDeck.length === 0);
+    this.cdr.detectChanges();
   }
 
   private launchConfetti() {
@@ -157,6 +163,7 @@ export class GameComponent {
       // after awarding, automatically draw the next two cards (show next round flipped)
       if (this.playerDeck.length === 0 || this.computerDeck.length === 0) {
         this.battleStage = 'idle';
+        this.cdr.detectChanges();
         return;
       }
       // draw next two
@@ -183,9 +190,11 @@ export class GameComponent {
         this.flipCards.right = false;
         this.inBattle = false;
         this.lastWinner = null;
+        this.cdr.detectChanges();
         return;
       }
       this.lastWinner = nextWinner;
+      this.cdr.detectChanges();
       return;
     }
     // Idle -> initial draw
@@ -222,8 +231,8 @@ export class GameComponent {
         this.battleStage = 'drawn';
         this.inBattle = false;
       }
+      this.cdr.detectChanges();
       return;
-      
     }
 
     // facedown -> draw facedown cards and move to reveal phase
@@ -240,6 +249,7 @@ export class GameComponent {
       await this.sleep(250);
       this.battleStage = 'reveal';
       this.inBattle = false;
+      this.cdr.detectChanges();
       return;
     }
 
@@ -249,6 +259,7 @@ export class GameComponent {
       if (this.playerDeck.length === 0 || this.computerDeck.length === 0) {
         this.inBattle = false;
         this.battleStage = 'idle';
+        this.cdr.detectChanges();
         return;
       }
       const pFace = this.playerDeck.shift()!;
@@ -267,6 +278,7 @@ export class GameComponent {
         // stay in facedown (another war); keep warPhase and let user click Next
         this.battleStage = 'facedown';
         this.inBattle = false;
+        this.cdr.detectChanges();
         return;
       }
       // not tie: animate and award
@@ -282,6 +294,7 @@ export class GameComponent {
       this.battleStage = 'idle';
       this.inBattle = false;
       this.checkForGameOver();
+      this.cdr.detectChanges();
       return;
     }
 
@@ -419,21 +432,27 @@ export class GameComponent {
         setTimeout(() => {
           const cardObj = this.animatingCards.find(c => c.id === id);
           if (!cardObj) { resolve(); return; }
+          let tx = 0, ty = 0; const branch = targetRect ? 'target' : 'fade';
           if (targetRect) {
-            // land at the center of the stack so animation goes to the middle of the pile
             const destCenterX = (targetRect.left + targetRect.width / 2) - cardHalf;
             const destCenterY = (targetRect.top + targetRect.height / 2 - 48);
-            const tx = destCenterX - left + (idx * -2);
-            const ty = destCenterY - top + (idx * -2);
-            cardObj.style.transform = `translate(${tx}px, ${ty}px) scale(0.75)`;
-            cardObj.style.opacity = 1;
+            tx = destCenterX - left + (idx * -2);
+            ty = destCenterY - top + (idx * -2);
           } else {
-            // fade out and drop a bit
-            cardObj.style.transform = `translate(${(Math.random()-0.5)*20}px, ${40 + idx}px) scale(0.6)`;
-            cardObj.style.opacity = 0.05;
+            tx = (Math.random()-0.5)*20; ty = 40 + idx;
           }
-          // resolve after duration
-          setTimeout(() => resolve(), duration + 40);
+          const newTransform = targetRect
+            ? `translate(${tx}px, ${ty}px) scale(0.75)`
+            : `translate(${tx}px, ${ty}px) scale(0.6)`;
+          const newOpacity = targetRect ? 1 : 0.05;
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              if (!this.animatingCards.find(c => c.id === id)) { resolve(); return; }
+              cardObj.style = { ...cardObj.style, transform: newTransform, opacity: newOpacity };
+              this.cdr.detectChanges();
+              setTimeout(() => resolve(), duration + 40);
+            });
+          });
         }, startDelay);
       });
       waits.push(animPromise);
@@ -446,6 +465,7 @@ export class GameComponent {
     // cleanup
     this.animatingCards = [];
     this._pendingAnimResolvers.clear();
+    this.cdr.detectChanges();
   }
 
   // center pile getters removed — center piles are displayed from the main flip slots now
